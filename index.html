@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -511,8 +512,15 @@
 							coordinates = part[c];
 							//console.log("coordinates");
 							//console.log(coordinates);
-							x_list.push(coordinates[0]);
-							y_list.push(coordinates[1]);		
+							if (coordinates[0] > 0 && coordinates[1] > 0)
+							{
+								x_list.push(coordinates[0]);
+								y_list.push(coordinates[1]);
+							}
+							else
+							{
+								console.log("null xy");
+							}							
 						}
 					}		
 				}
@@ -522,11 +530,14 @@
 			min_x = Math.min.apply(null, x_list);
 			min_y = Math.min.apply(null, y_list);
 			
-			var bbox = [[max_x, max_y], [min_x, min_y]];
-			map.fitBounds(bbox, 
+			if (max_x > 0 && max_y > 0 && min_x > 0 && min_y > 0)
 			{
-			  padding: {top: 10, bottom:25, left: 15, right: 5}
-			});		
+				var bbox = [[max_x, max_y], [min_x, min_y]];
+				map.fitBounds(bbox, 
+				{
+				  padding: {top: 10, bottom:25, left: 15, right: 5}
+				});	
+			}			
 		});
 	}
 	
